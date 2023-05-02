@@ -24,11 +24,9 @@ interface GlobalState {
   modalApp: ModalType;
   localeApp: LocaleType;
 }
-interface Errors {
-  errors: Record<string, string>[];
-}
+
 interface ResponseErrors {
-  errors: Errors;
+  errors: Record<string, string>[];
   statusCode: number;
 }
 
@@ -51,5 +49,4 @@ export type {
   PaginationResponse,
   PaginationParams,
   ResponseErrors,
-  Errors,
 };

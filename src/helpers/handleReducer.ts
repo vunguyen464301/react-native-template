@@ -1,7 +1,9 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import {PayloadAction} from '@reduxjs/toolkit';
 
-interface ResponseSuccessAction<T = unknown> extends PayloadAction<{ data: T; status: number }> {}
-interface ResponseFailureAction<T = unknown> extends PayloadAction<{ error: T; status: number }> {}
+interface ResponseSuccessAction<T = unknown>
+  extends PayloadAction<{data: T; status: number}> {}
+interface ResponseFailureAction<T = unknown>
+  extends PayloadAction<{error: T; status: number}> {}
 
 interface ResponseError {
   error: string;
@@ -28,7 +30,7 @@ const initResponseState = <D, E>(): ResponseStateType<D, E> => {
 
 const responseSuccess = <T = unknown, D = unknown>(
   prevData: T,
-  action: PayloadAction<{ data: D; status: number }>
+  action: PayloadAction<{data: D; status: number}>,
 ): T => {
   return {
     ...prevData,
@@ -41,7 +43,7 @@ const responseSuccess = <T = unknown, D = unknown>(
 
 const responseReject = <T = unknown, D = unknown>(
   prevData: T,
-  action: PayloadAction<{ error: D; status: number }>
+  action: PayloadAction<{error: D; status: number}>,
 ): T => {
   return {
     ...prevData,
@@ -55,6 +57,7 @@ const responseReject = <T = unknown, D = unknown>(
 const responsePending = <T = unknown>(prevData: T): T => {
   return {
     ...prevData,
+    error: null,
     data: null,
     status: null,
     statusMessage: null,
@@ -62,5 +65,10 @@ const responsePending = <T = unknown>(prevData: T): T => {
   };
 };
 
-export type { ResponseSuccessAction, ResponseFailureAction, ResponseStateType, ResponseError };
-export { responseSuccess, responseReject, responsePending, initResponseState };
+export type {
+  ResponseSuccessAction,
+  ResponseFailureAction,
+  ResponseStateType,
+  ResponseError,
+};
+export {responseSuccess, responseReject, responsePending, initResponseState};

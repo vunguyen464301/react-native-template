@@ -1,5 +1,5 @@
 import useLocale from 'hooks/useLocale';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   ScrollView,
@@ -21,6 +21,9 @@ import {useDispatch} from 'react-redux';
 import {useAppDispatch, useAppSelector} from 'services/store';
 import {loginRequest, selectLogin} from 'services/reducers/auth';
 import api from 'services/api';
+import {setLoadingApp} from 'services/reducers/global';
+import {messageError, messageSuccess} from 'helpers/flashMessages';
+import {handleMessageError} from 'helpers/functions';
 
 interface LoginForm {
   email: string;
@@ -42,6 +45,18 @@ const LoginScreen = (): JSX.Element => {
   const {messages, setLocale} = useLocale();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const selectorLogin = useAppSelector(selectLogin);
+
+  useEffect(() => {
+    dispatch(setLoadingApp(Boolean(selectorLogin.loading)));
+    console.log(selectorLogin);
+
+    if (!selectorLogin.loading && selectorLogin.error) {
+      const message = handleMessageError(val => val)(selectorLogin.error);
+      messageError(message.join(', '));
+    } else if (selectorLogin.statusMessage === 'success') {
+      messageSuccess('Login Success');
+    }
+  }, [selectorLogin]);
 
   const onUpdateLanguage = (locale: LocaleType) => {
     setLocale(locale);

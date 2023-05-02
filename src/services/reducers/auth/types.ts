@@ -1,5 +1,5 @@
 import {ResponseStateType} from 'helpers/handleReducer';
-import type {Errors, ResponseErrors} from '../global/type';
+import type {ResponseErrors} from '../global/type';
 
 interface LoginRequest {
   email: string;
