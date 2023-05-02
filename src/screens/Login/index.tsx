@@ -31,8 +31,8 @@ interface LoginForm {
 }
 
 const initialValues = {
-  email: '',
-  password: '',
+  email: 'anhvu23@gmaim.com',
+  password: 'haylam',
 };
 
 const validationSchema = Yup.object().shape({
@@ -55,6 +55,7 @@ const LoginScreen = (): JSX.Element => {
       messageError(message.join(', '));
     } else if (selectorLogin.statusMessage === 'success') {
       messageSuccess('Login Success');
+      navigation.navigate('HOME');
     }
   }, [selectorLogin]);
 

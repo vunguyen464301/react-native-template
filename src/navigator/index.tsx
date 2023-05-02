@@ -6,6 +6,7 @@ import {stackName, type RootStackParamList} from './routes';
 import LoginScreen from 'screens/Login';
 import options from './options';
 import RegisterScreen from 'screens/Register';
+import HomeScreen from 'screens/Home';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -23,6 +24,11 @@ const Navigator = () => {
           name={stackName.register}
           component={RegisterScreen}
           options={options.registerOption}
+        />
+        <Stack.Screen
+          name={stackName.home}
+          component={HomeScreen}
+          options={options.homeOption}
         />
       </Stack.Navigator>
     </NavigationContainer>
