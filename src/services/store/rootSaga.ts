@@ -1,5 +1,5 @@
 import {all} from 'redux-saga/effects';
-import {authSagas} from 'services/reducers/auth';
+import authSagas from 'services/reducers/auth/sagas';
 import {globalSagas} from 'services/reducers/global';
 
 function* rootSaga() {

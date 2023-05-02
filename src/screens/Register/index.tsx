@@ -11,7 +11,6 @@ import {
 const RegisterScreen = (): JSX.Element => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const route = useRoute<RouteProp<RootStackParamList, 'REGISTER'>>();
-  console.log(route.name);
 
   return (
     <View>

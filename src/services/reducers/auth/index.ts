@@ -7,11 +7,13 @@ const {setUser, setAccessToken} = authSlice.actions;
 
 const selectUser = (state: RootState) => state.auth.user;
 const selectAccessToken = (state: RootState) => state.auth.accessToken;
+const selectLogin = (state: RootState) => state.auth.login;
 
-export {setUser, setAccessToken, selectUser, selectAccessToken};
+export const {loginRequest, loginSuccess, loginFailure} = authSlice.actions;
+
+export {setUser, setAccessToken, selectUser, selectAccessToken, selectLogin};
 
 export {default as authMiddleware} from './middleware';
-export {default as authSagas} from './sagas';
 
 export default {
   auth: authReducer,

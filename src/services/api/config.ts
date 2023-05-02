@@ -55,7 +55,6 @@ const config = async (requestConfig: RequestConfig) => {
   ) {
     try {
       const response = await axios(axiosConfig);
-
       resolve({data: response.data, status: response.status});
     } catch (error: any) {
       reject({

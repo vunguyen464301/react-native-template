@@ -17,6 +17,10 @@ import * as Yup from 'yup';
 import s from 'styles';
 import InputCustom1 from 'components/inputs/InputCustom1';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useDispatch} from 'react-redux';
+import {useAppDispatch, useAppSelector} from 'services/store';
+import {loginRequest, selectLogin} from 'services/reducers/auth';
+import api from 'services/api';
 
 interface LoginForm {
   email: string;
@@ -34,8 +38,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const {messages, setLocale} = useLocale();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const selectorLogin = useAppSelector(selectLogin);
 
   const onUpdateLanguage = (locale: LocaleType) => {
     setLocale(locale);
@@ -54,7 +60,8 @@ const LoginScreen = (): JSX.Element => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: values => {
-      console.log(values);
+      console.log('values', values);
+      dispatch(loginRequest({...values}));
     },
   });
 

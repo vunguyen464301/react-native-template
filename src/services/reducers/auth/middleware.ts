@@ -25,5 +25,4 @@ const authMiddleware: Middleware<unknown, RootState> =
 
     return next(action);
   };
-
 export default [authMiddleware];

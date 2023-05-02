@@ -24,10 +24,14 @@ interface GlobalState {
   modalApp: ModalType;
   localeApp: LocaleType;
 }
-interface ResponseErrors {
+interface Errors {
   errors: Record<string, string>[];
+}
+interface ResponseErrors {
+  errors: Errors;
   statusCode: number;
 }
+
 type LocaleType = 'vi-VN' | 'en-US';
 
 interface PaginationResponse<T> {
@@ -43,8 +47,9 @@ export type {
   GlobalState,
   ToastType,
   ModalType,
-  ResponseErrors,
   LocaleType,
   PaginationResponse,
   PaginationParams,
+  ResponseErrors,
+  Errors,
 };

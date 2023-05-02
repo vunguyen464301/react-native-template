@@ -1,3 +1,6 @@
+import {ResponseStateType} from 'helpers/handleReducer';
+import type {Errors, ResponseErrors} from '../global/type';
+
 interface LoginRequest {
   email: string;
   password: string;
@@ -14,9 +17,6 @@ interface UserType {
 interface User {
   user: UserType;
 }
-interface UserErrors {
-  errors: Record<string, string>;
-}
 
 interface RegisterRequest {
   username: string;
@@ -24,14 +24,10 @@ interface RegisterRequest {
   password: string;
 }
 
-interface ResponseUserError {
-  data: UserErrors;
-  status: number;
-}
-
 interface AuthState {
   user?: ResponseUser | null;
   accessToken?: string | null | undefined;
+  login: ResponseStateType<User, ResponseErrors>;
 }
 
 interface ResponseLogin {
@@ -48,15 +44,17 @@ interface ResponseUser {
   created: number;
   updated: number;
 }
+interface AccessToken {
+  accessToken: string;
+}
 
 export type {
   AuthState,
   User,
   LoginRequest,
-  UserErrors,
   RegisterRequest,
   UserType,
-  ResponseUserError,
   ResponseLogin,
   ResponseUser,
+  AccessToken,
 };

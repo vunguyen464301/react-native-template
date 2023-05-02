@@ -12,7 +12,7 @@ const globalMiddleware: Middleware<unknown, RootState> =
       if (openApp) {
         const accessToken = await getAccessTokenStorage();
         const locale = await getLocaleStorage();
-        console.log(locale);
+        console.log('locale', locale);
         if (accessToken) {
           store.dispatch(setAccessToken(accessToken));
         }
