@@ -1,9 +1,37 @@
 import useLocale from 'hooks/useLocale';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {
+  Button,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {LocaleType} from 'services/reducers/global/type';
 import {RootStackParamList} from 'navigator/routes';
 import {useNavigation, type NavigationProp} from '@react-navigation/native';
+import styles from './styles';
+import {Formik, useFormik} from 'formik';
+import * as Yup from 'yup';
+import s from 'styles';
+import InputCustom1 from 'components/inputs/InputCustom1';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+const initialValues = {
+  email: '',
+  password: '',
+};
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required('Required'),
+  password: Yup.string().required('Required'),
+});
 
 const LoginScreen = (): JSX.Element => {
   const {messages, setLocale} = useLocale();
@@ -12,10 +40,28 @@ const LoginScreen = (): JSX.Element => {
   const onUpdateLanguage = (locale: LocaleType) => {
     setLocale(locale);
   };
+  const {
+    getFieldProps,
+    errors,
+    handleSubmit,
+    isValid,
+    submitForm,
+    handleChange,
+    handleBlur,
+    setFieldTouched,
+    values,
+  } = useFormik<LoginForm>({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
 
   return (
-    <View style={{marginTop: 300}}>
-      <View
+    <SafeAreaView style={styles.bg} edges={['bottom', 'left', 'right']}>
+      <ScrollView>
+        {/* <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -39,8 +85,39 @@ const LoginScreen = (): JSX.Element => {
         style={{padding: 20, backgroundColor: 'yellow', alignItems: 'center'}}
         onPress={() => navigation.navigate('REGISTER', {user: 'ABC'})}>
         <Text style={{color: 'black', fontSize: 30}}>Register</Text>
-      </TouchableOpacity>
-    </View>
+      </TouchableOpacity> */}
+
+        <View style={[s.rowCenter, s.alignItemCenter, s.mt40]}>
+          <View style={styles.loginForm}>
+            <InputCustom1
+              label="Email"
+              value={values.email}
+              onChangeText={handleChange('email')}
+              error={errors.email}
+            />
+            <InputCustom1
+              label="Password"
+              value={values.password}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              secureTextEntry={true}
+              error={errors.password}
+            />
+
+            <View style={[s.rowBetween, s.mt20]}>
+              <TouchableOpacity style={[styles.registerButton]}>
+                <Text style={[s.textWhite_1, s.textCenter]}>Register</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={[styles.loginButton]}>
+                <Text style={[s.textWhite_1, s.textCenter]}>Login</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
