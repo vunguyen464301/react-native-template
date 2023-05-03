@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="LOGIN">
         <Stack.Screen
           name={stackName.login}
           component={LoginScreen}
