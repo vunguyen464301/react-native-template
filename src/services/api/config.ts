@@ -48,6 +48,7 @@ const config = async (requestConfig: RequestConfig) => {
     ...requestConfig,
     url: apiURL,
   };
+  console.info(axiosConfig);
 
   const executor = async function (
     resolve: (val: unknown) => void,
@@ -57,7 +58,6 @@ const config = async (requestConfig: RequestConfig) => {
       const response = await axios(axiosConfig);
       resolve({data: response.data, status: response.status});
     } catch (error: any) {
-      console.log(error);
       reject({
         error: error?.response?.data,
         status: error?.response?.request?.status,

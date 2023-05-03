@@ -1,13 +1,6 @@
 import useLocale from 'hooks/useLocale';
 import React, {useEffect} from 'react';
-import {
-  Button,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {LocaleType} from 'services/reducers/global/type';
 import {RootStackParamList} from 'navigator/routes';
 import {useNavigation, type NavigationProp} from '@react-navigation/native';
@@ -62,6 +55,7 @@ const LoginScreen = (): JSX.Element => {
   const onUpdateLanguage = (locale: LocaleType) => {
     setLocale(locale);
   };
+
   const {
     getFieldProps,
     errors,
@@ -75,7 +69,7 @@ const LoginScreen = (): JSX.Element => {
   } = useFormik<LoginForm>({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: values => {
+    onSubmit: async values => {
       console.log('values', values);
       dispatch(loginRequest({...values}));
     },
