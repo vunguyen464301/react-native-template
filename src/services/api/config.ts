@@ -5,8 +5,6 @@ import axios, {
   type Method,
   type RawAxiosRequestHeaders,
 } from 'axios';
-// import { getUserStorage } from '../localStorage';
-// import { UserType } from '../reducers/auth/types';
 
 interface RequestConfig {
   method?: Method;

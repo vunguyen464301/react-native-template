@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Text, View, NativeModules, Platform} from 'react-native';
 
 const {CalendarModule} = NativeModules;
+
 const HomeScreen = (): JSX.Element => {
   const onTest = () => {
     CalendarModule.createCalendarEvent('test', '1234324324');
