@@ -70,6 +70,7 @@ const LoginScreen = (): JSX.Element => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: async values => {
+      console.log('test');
       console.log('values', values);
       dispatch(loginRequest({...values}));
     },
